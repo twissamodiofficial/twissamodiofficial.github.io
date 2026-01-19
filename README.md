@@ -1,2 +1,0 @@
-# twissamodiofficial.github.io
-portfolio

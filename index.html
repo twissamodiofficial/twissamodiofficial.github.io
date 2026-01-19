@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twissa Modi - Software Engineer & AI Researcher</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --accent: #3498db;
+            --accent-hover: #2980b9;
+            --border: #e1e8ed;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --text-primary: #eaeaea;
+            --text-secondary: #a8b2d1;
+            --accent: #64ffda;
+            --accent-hover: #4dd9bc;
+            --border: #2d3561;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--border);
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h2 {
+            font-size: 1.8rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .highlight {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            margin: 2rem auto;
+            max-width: 900px;
+        }
+
+        .highlight h3 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background-color: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .project-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background-color: var(--bg-primary);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
+        }
+
+        .project-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-link:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--accent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            border: 3px solid var(--bg-primary);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .company {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item ul {
+            list-style-position: inside;
+            color: var(--text-secondary);
+        }
+
+        .timeline-item li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background-color: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .skill-category h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-item {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            border: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-card {
+            background-color: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .education-card h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card .institution {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card .date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .education-card ul {
+            list-style-position: inside;
+            color: var(--text-secondary);
+        }
+
+        /* Contact Section */
+        .contact-info {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-links a {
+            color: var(--text-primary);
+            font-size: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--bg-secondary);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo">TM</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()">🌓</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Twissa Modi</h1>
+            <h2>Software Engineer & AI Researcher</h2>
+            <p>Master's student in Artificial Intelligence at NTU Singapore with 3 years of software engineering experience at Microsoft. Co-inventor of patented Windows features, now exploring the frontiers of machine learning and agentic AI systems.</p>
+            
+            <div class="highlight">
+                <h3>🏆 Patent Holder & AI Innovator</h3>
+                <p>Co-invented and patented the Drop Tray feature in Windows | Transitioning from enterprise software engineering to cutting-edge AI research and development</p>
+            </div>
+
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="https://github.com/twissamodiofficial" target="_blank" class="btn btn-secondary">View GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a software engineer with a passion for building scalable systems and pushing the boundaries of artificial intelligence. My journey began at Microsoft, where I spent three years developing enterprise-grade features for Windows and contributed to a patented innovation that enhanced file-sharing workflows for millions of users worldwide.</p>
+                    <p>Currently pursuing my Master's in Artificial Intelligence at Nanyang Technological University, I'm diving deep into machine learning, deep learning, natural language processing, and computer vision. My focus has shifted toward agentic AI systems and intelligent automation that can solve complex, real-world problems.</p>
+                    <p>I bring a unique blend of production-ready software engineering skills and cutting-edge AI research capabilities, always with an eye toward creating meaningful impact through technology.</p>
+                </div>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">3+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">1</div>
+                        <div class="stat-label">Patent</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">16%</div>
+                        <div class="stat-label">Cost Reduction</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">13%</div>
+                        <div class="stat-label">Feature Discovery</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>🏥 Depression Diagnosis System</h3>
+                    <p>Capstone project developing an AI system to assist doctors in diagnosing depression through multimodal analysis of EEG readings, eye movements, and speech patterns in response to medical questions.</p>
+                    <div class="project-tags">
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">NLP</span>
+                        <span class="tag">Healthcare AI</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>🤖 Agentic AI Systems</h3>
+                    <p>Exploring autonomous AI agents capable of complex reasoning, decision-making, and task execution. Implementing various agentic frameworks and architectures to solve real-world automation challenges.</p>
+                    <div class="project-tags">
+                        <span class="tag">AI Agents</span>
+                        <span class="tag">LLMs</span>
+                        <span class="tag">Automation</span>
+                        <span class="tag">Python</span>
+                    </div>
+                    <a href="https://github.com/twissamodiofficial/AI-agents-projects" target="_blank" class="project-link">View on GitHub →</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>📁 Intelligent File Suggestion Tool</h3>
+                    <p>Hackathon project that identifies and recommends pertinent files based on user intent within sharing contexts, improving productivity and reducing search time.</p>
+                    <div class="project-tags">
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">UX</span>
+                        <span class="tag">Productivity</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3>🪟 Windows Drop Tray (Patent)</h3>
+                    <p>Co-invented and patented feature enhancing file sharing workflows in Windows, deployed to millions of users worldwide. Designed dynamic previews and integrated cross-platform functionality.</p>
+                    <div class="project-tags">
+                        <span class="tag">C#/.NET</span>
+                        <span class="tag">XAML</span>
+                        <span class="tag">C++/WinRT</span>
+                        <span class="tag">Patent</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h3>Software Engineer</h3>
+                    <div class="company">Microsoft | Hyderabad, India</div>
+                    <div class="date">August 2022 – July 2025</div>
+                    <ul>
+                        <li>Co-invented and patented the Drop Tray feature in Windows, enhancing user experience in file sharing workflows</li>
+                        <li>Re-architected backend services for Family Safety, reducing compute costs by ~16%</li>
+                        <li>Migrated CosmosDB and Service Bus resources using C#/.NET, improving reliability and scalability</li>
+                        <li>Integrated Windows Share with Microsoft Edge, contributing to 13% increase in feature discovery</li>
+                        <li>Mentored junior developers and contributed to internal hackathons focused on user intent and productivity</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Software Engineer Intern</h3>
+                    <div class="company">McKinsey Digital Labs (McKinsey & Co.) | Bangalore, India</div>
+                    <div class="date">February 2022 – July 2022</div>
+                    <ul>
+                        <li>Rapidly acquired proficiency in ReactJS for front-end development and Node.js for back-end operations</li>
+                        <li>Successfully managed client projects with excellent communication skills</li>
+                        <li>Collaborated with designers to finalize and implement designs</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h3>Summer Intern</h3>
+                    <div class="company">Optum | Noida, India</div>
+                    <div class="date">June 2021 – August 2021</div>
+                    <ul>
+                        <li>Developed interactive dashboard utilizing Python's Plotly and Dash libraries</li>
+                        <li>Leveraged PostgreSQL for efficient data management and storage</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Technologies</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Python</span>
+                        <span class="skill-item">C++</span>
+                        <span class="skill-item">JavaScript</span>
+                        <span class="skill-item">SQL</span>
+                        <span class="skill-item">C#</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>AI & Machine Learning</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Machine Learning</span>
+                        <span class="skill-item">Deep Learning</span>
+                        <span class="skill-item">NLP</span>
+                        <span class="skill-item">Computer Vision</span>
+                        <span class="skill-item">PyTorch</span>
+                        <span class="skill-item">Scikit-learn</span>
+                        <span class="skill-item">OpenCV</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Development Tools</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">Git & GitHub</span>
+                        <span class="skill-item">React.js</span>
+                        <span class="skill-item">Node.js</span>
+                        <span class="skill-item">.NET</span>
+                        <span class="skill-item">Express.js</span>
+                        <span class="skill-item">XAML</span>
+                        <span class="skill-item">C++/WinRT</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Core Concepts</h3>
+                    <div class="skill-list">
+                        <span class="skill-item">OOP</span>
+                        <span class="skill-item">Data Structures</span>
+                        <span class="skill-item">Algorithms</span>
+                        <span class="skill-item">Agile</span>
+                        <span class="skill-item">System Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education & Certifications</h2>
+            <div class="education-grid">
+                <div class="education-card">
+                    <h3>Master's in Artificial Intelligence</h3>
+                    <div class="institution">Nanyang Technological University, Singapore</div>
+                    <div class="date">August 2025 - June 2026</div>
+                    <ul>
+                        <li>Coursework: Machine Learning, Deep Learning, NLP, Computer Vision</li>
+                    </ul>
+                </div>
+
+                <div class="education-card">
+                    <h3>Bachelor of Engineering</h3>
+                    <div class="institution">Thapar Institute of Engineering & Technology, India</div>
+                    <div class="date">July 2018 – June 2022</div>
+                    <ul>
+                        <li>Computer Engineering - 9.54 CGPA</li>
+                        <li>Scholarship holder</li>
+                    </ul>
+                </div>
+
+                <div class="education-card">
+                    <h3>Certifications</h3>
+                    <ul>
+                        <li>Machine Learning Specialization – DeepLearning.AI (Coursera)</li>
+                        <li>Foundations of AI – Microsoft</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-info">
+                <p>I'm always interested in discussing new opportunities, collaborations, or interesting problems in AI and software engineering. Feel free to reach out!</p>
+                <div class="contact-links">
+                    <a href="mailto:twissamodiofficial@gmail.com" title="Email">📧</a>
+                    <a href="https://www.linkedin.com/in/twissamodi/" target="_blank" title="LinkedIn">💼</a>
+                    <a href="https://github.com/twissamodiofficial" target="_blank" title="GitHub">🐙</a>
+                </div>
+                <p style="margin-top: 2rem; color: var(--text-secondary);">
+                    📍 Singapore<br>
+                    📧 twissamodiofficial@gmail.com<br>
+                    📱 +65-87402729
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Twissa Modi. Built with passion for AI and innovation.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
